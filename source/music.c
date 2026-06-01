@@ -1,4 +1,4 @@
-#include "music.h"
+#include "undertale_fight_simulator.h"
 
 void play_music(enum Song song) {
     // Make sure that the sound engine on the ARM7 is initialized
