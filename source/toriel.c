@@ -2,10 +2,8 @@
 
 void toriel_init(Toriel *toriel)
 {
-    toriel->x = 50;
+    toriel->x = 60;
     toriel->y = 20;
-
-    dmaCopy(toriel0Pal, SPRITE_PALETTE, toriel0PalLen);
 
     toriel->gfx[0] = oamAllocateGfx(
         &oamMain,
@@ -38,7 +36,7 @@ void toriel_update(Toriel *toriel)
     int x = toriel->x;
     int y = toriel->y;
 
-    oamSet(&oamMain, 10,
+    oamSet(&oamMain, 0,
            x, y,
            0, 0,
            SpriteSize_64x64,
@@ -46,7 +44,7 @@ void toriel_update(Toriel *toriel)
            toriel->gfx[0],
            -1, false, false, false, false, false);
 
-    oamSet(&oamMain, 11,
+    oamSet(&oamMain, 1,
            x + 64, y,
            0, 0,
            SpriteSize_64x64,
@@ -54,7 +52,7 @@ void toriel_update(Toriel *toriel)
            toriel->gfx[1],
            -1, false, false, false, false, false);
 
-    oamSet(&oamMain, 12,
+    oamSet(&oamMain, 2,
            x, y + 64,
            0, 0,
            SpriteSize_64x64,
@@ -62,7 +60,7 @@ void toriel_update(Toriel *toriel)
            toriel->gfx[2],
            -1, false, false, false, false, false);
 
-    oamSet(&oamMain, 13,
+    oamSet(&oamMain, 3,
            x + 64, y + 64,
            0, 0,
            SpriteSize_64x64,

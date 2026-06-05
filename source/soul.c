@@ -1,6 +1,6 @@
 #include "undertale_fight_simulator.h"
 
-void soul_init(Soul* soul, OamState* oam) {
+void soul_init(Soul* soul, OamState* oam, int max_hp) {
 	// Initialize soul position
 	soul->x = 256 / 2;
 	soul->y = 196 / 2;
@@ -11,6 +11,7 @@ void soul_init(Soul* soul, OamState* oam) {
 	// Load the soul graphics
 	dmaCopy(soul_spriteTiles, soul->gfx, soul_spriteTilesLen);
 	dmaCopy(soul_spritePal, SPRITE_PALETTE_SUB, soul_spritePalLen);
+	soul->hp = max_hp;
 }
 
 void soul_update(Soul* soul, OamState* oam) {
@@ -38,6 +39,8 @@ void soul_update(Soul* soul, OamState* oam) {
 			soul->y = soul->y + 2;
 		if (keys & KEY_UP)
 			soul->y = soul->y - 2;
+		if (keys & KEY_A)
+			soul->hp = soul->hp + 1;
 	}
 	
 	// Boundary checking

@@ -17,15 +17,28 @@ int main(int argc, char** argv) {
 
 	// Initialisation of the sprite renderer in top and botom screen
 	oamInit(&oamSub, SpriteMapping_1D_32, false);
-	oamInit(&oamMain, SpriteMapping_1D_32, false);
+	oamInit(&oamMain, SpriteMapping_1D_128, true);
 
+	vramSetBankF(VRAM_F_LCD);
+
+	dmaCopy(toriel0Pal, VRAM_F_EXT_SPR_PALETTE[0], toriel0PalLen);
+	dmaCopy(fight_oPal,  VRAM_F_EXT_SPR_PALETTE[1], act_oPalLen);
+	dmaCopy(act_oPal,  VRAM_F_EXT_SPR_PALETTE[2], act_oPalLen);
+	dmaCopy(item_oPal,  VRAM_F_EXT_SPR_PALETTE[3], act_oPalLen);
+	dmaCopy(mercy_oPal,  VRAM_F_EXT_SPR_PALETTE[4], act_oPalLen);
+	dmaCopy(digit_0Pal,  VRAM_F_EXT_SPR_PALETTE[5], digit_0PalLen);
+
+
+	vramSetBankF(VRAM_F_SPRITE_EXT_PALETTE);
 	// Initialize the soul sprite and buttons
 	Soul soul = {0};
 	Toriel toriel = {0};
 	Bouton bouton[4] = {0};
-	soul_init(&soul, &oamSub);
-	bouton_init(bouton, &oamMain);
+	Digit digit = {0};
+	soul_init(&soul, &oamSub, 20);
 	toriel_init(&toriel);
+	bouton_init(bouton, &oamMain);
+	hp_init(&soul, &oamMain, &digit);
 
 	// Play the song
 	enum Song song = TORIEL;
@@ -33,9 +46,11 @@ int main(int argc, char** argv) {
 
 	while(1) {
 		soul_update(&soul, &oamSub);
-		bouton_update(bouton);
 		toriel_update(&toriel);
+		bouton_update(bouton);
+		hp_update(&soul, &oamMain, &digit);
 		oamUpdate(&oamMain);
+		oamUpdate(&oamSub);
 		swiWaitForVBlank();
 	}
 	return 0;
