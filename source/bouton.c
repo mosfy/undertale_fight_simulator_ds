@@ -1,6 +1,6 @@
 #include "undertale_fight_simulator.h"
 
-#define BUTTON_COUNT 4
+#define BUTTON_COUNT 8
 #define BUTTON_X_START -1
 #define BUTTON_Y 192-32
 #define BUTTON_SPACING 64
@@ -8,6 +8,10 @@
 void bouton_init(Bouton bouton[], OamState* oam)
 {
     const void* tiles[BUTTON_COUNT] = {
+        fight_oTiles,
+        act_oTiles,
+        item_oTiles,
+        mercy_oTiles,
         fight_oTiles,
         act_oTiles,
         item_oTiles,
