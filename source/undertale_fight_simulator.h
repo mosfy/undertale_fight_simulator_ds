@@ -45,7 +45,6 @@ typedef struct {
 
 typedef struct {
     int x, y;
-    int current; //-1 None, 0 fight, 1 act, 2 item, 3 mercy
     u16 *gfx;
 } Bouton;
 
@@ -62,6 +61,7 @@ typedef struct {
     GameTurn turn;
     EnemyAttack current_attack;
     int turn_timer;
+    int current_action; //-1 None, 0 fight, 1 act, 2 item, 3 mercy
 } GameManager;
 
 enum Song {
@@ -111,7 +111,7 @@ void soul_update(Soul* soul, OamState* oam, GameManager* manager, int keys);
 void bouton_init(Bouton bouton[], OamState* oam);
 
 // Render the top screen buttons
-void bouton_update(Bouton bouton[]);
+void bouton_update(Bouton bouton[], GameManager* manager);
 
 
 

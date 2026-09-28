@@ -26,7 +26,7 @@ void hp_update(Soul* soul, OamState* oam, Digit *digit){
     // Draw the tens, - tens for x cause i dosn't crop well the digit sprite
     oamSet(oam, 11,
            100, 192-32-16, //x, y 
-           1, 5 + tens, // priority, palette
+           1, 9 + tens, // priority, palette
            SpriteSize_16x16,
            SpriteColorFormat_256Color,
            digit->gfx[tens],
@@ -35,7 +35,7 @@ void hp_update(Soul* soul, OamState* oam, Digit *digit){
            // Draw the units, - tens for x cause i dosn't crop well the digit sprite
     oamSet(oam, 10,
            120, 192-32-16, //x, y 
-           1, 5 + units, // priority, palette
+           1, 9 + units, // priority, palette
            SpriteSize_16x16,
            SpriteColorFormat_256Color,
            digit->gfx[units],
